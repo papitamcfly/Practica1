@@ -19,7 +19,9 @@ Route::get('/', function () {
 Route::get('/register', function () {
     return view('register');
 })->name('register');
-
+Route::get('/verifiycode', function () {
+    return view('verifycode');
+})->name('verifiycode');
 Route::group([
 
     'middleware' => 'api',
@@ -29,9 +31,14 @@ Route::group([
 
 Route::post('/login', [UsersController::class, 'login'])->name('loginpost');
 Route::post('/register/post', [UsersController::class, 'register'])->name('registerpost');
-
+Route::post('/verifycodepost', [UsersController::class, 'verificarcodigo'])->name('Verifycodepost');
 Route::get('/logout', [UsersController::class, 'logout'])->name('logout');
 });
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard')->middleware('auth.jwt');
+Route::get('/index', [UsersController::class, 'index'])->name('indexusers');
+Route::get('/show/{id}', [UsersController::class, 'show'])->name('showuser');
+Route::put('/edit/{id}', [UsersController::class, 'edit'])->name('edituser');
+Route::post('/clear-cookie-and-login', [UsersController::class, 'clearCookieAndLogin'])->name('clearCookieAndLogin');
+

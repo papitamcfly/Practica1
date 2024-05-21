@@ -54,5 +54,5 @@ Login
             </div>
         </div>
     </div>
-
+    <a href="{{ route('register') }}">registro</a>
 @endsection

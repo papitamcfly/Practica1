@@ -1,3 +1,31 @@
+<style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .wrapper {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            flex-grow: 1;
+        }
+
+        footer {
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            margin-top: auto;
+        }
+    </style>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,21 +39,21 @@
     <!-- Agregar enlaces a hojas de estilo CSS, scripts JavaScript, etc. -->
 </head>
 <body>
-    <header>
-        <!-- Encabezado de la página -->
-        <h1>@yield('encabezado')</h1>
-
-    </header>
-
-    <main>
-        <!-- Contenido dinámico de la vista -->
-        @yield('content')
-    </main>
-
+    
+<div class="wrapper">
+        <header>
+            <!-- Encabezado de la página -->
+            <h1>@yield('encabezado')</h1>
+        </header>
+        <main>
+            <!-- Contenido dinámico de la vista -->
+            @yield('content')
+        </main>
+    </div>
     <footer>
         <!-- Pie de página -->
         <p>&copy; {{ date('Y') }} Todos los derechos reservados juasjuas. cuchau</p>
-        <a href="{{ route('register') }}">registro</a>
+
 
     </footer>
 </body>
