@@ -7,7 +7,20 @@
       <div class="navbar-nav">
         <a class="nav-link active" aria-current="page" href="/dashboard">Dashboard</a>
         <a class="nav-link" href="/index">Usuarios</a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Localizacion
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="map">registrar</a></li>
+            <li><a class="dropdown-item" href="ubicaciones">Ubicaciones</a></li>
+          </ul>
+        </li>
+        <li class="nav-item d-flex">
+          <a class="nav-link" href="logout">Cerrar sesion</a>
+        </li>
       </div>
+      
     </div>
   </div>
 </nav>

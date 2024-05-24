@@ -3,6 +3,7 @@
 Registro
 @endsection
 @section('content')
+<script src="https://www.google.com/recaptcha/api.js?render=6Lc1JuUpAAAAAHNJwJzMZnzTylJlVZ4tP6P1KXwD"></script>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -10,11 +11,20 @@ Registro
                 <div class="card-header">{{ __('Registro de Usuario') }}</div>
 
                 <div class="card-body">
-
+                @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
                     <form method="POST" action="{{ route('registerpost') }}">
                         @csrf
 
                         <div class="row mb-3">
+                            
                             <div class="col">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}"  autocomplete="name" autofocus placeholder="Nombre">
                                 @error('name')
@@ -92,6 +102,11 @@ Registro
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation"  autocomplete="new-password" placeholder="Confirmar Contraseña">
                             </div>
                         </div>
+                        @error('g-recaptcha-response')
+        <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+    @enderror
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
@@ -109,4 +124,21 @@ Registro
         </div>
     </div>
 </div>
+<script>
+    document.addEventListener('submit',function(e)
+    {
+        e.preventDefault();
+        grecaptcha.ready(function() {
+          grecaptcha.execute('6Lc1JuUpAAAAAHNJwJzMZnzTylJlVZ4tP6P1KXwD', {action: 'submit'}).then(function(token) {
+              let form = e.target;
+              let input = document.createElement('input');
+              input.type = 'hidden';
+              input.name = 'g-recaptcha-response';
+              input.value = token;
+              form.appendChild(input);
+              form.submit();
+          });
+        });
+    });
+</script>
 @endsection

@@ -25,8 +25,8 @@ return new class extends Migration
             $table->integer('code');
             $table->rememberToken();
             $table->timestamps();
-            $table->unsignedDecimal('latitude')->nullable();
-            $table->unsignedDecimal('longitude')->nullable();
+            $table->double('latitude')->default(0);
+            $table->double('longitude')->default(0);
             $table->boolean('active')->default(0);
         });
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\CodigoVerificacion;
 use App\Models\User;
+use App\Rules\recaptcha;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -27,6 +28,7 @@ class UsersController extends Controller
             'email' => 'required|string|email|unique:users',
             'phone'=>'required|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'g-recaptcha-response' => ['required',new recaptcha()]
                 ],[
             'name.required' => 'El campo nombre es obligatorio.',
             'lastname_p.required' => 'El campo apellido paterno es obligatorio.',
@@ -44,6 +46,8 @@ class UsersController extends Controller
             'password.required' => 'El campo contraseña es obligatorio.',
             'password.string' => 'La contraseña debe ser una cadena de texto.',
             'password.min' => 'La contraseña debe tener al menos 6 caracteres.',
+            'recaptcha.required' => 'El recaptcha es obligatorio.',
+            'recaptcha.recaptcha' => 'El reCAPTCHA es inválido.'
         ]);
         if ($validate->fails()) {
             return redirect()->back()->withErrors($validate->errors())->withInput();
@@ -157,5 +161,21 @@ class UsersController extends Controller
         ));
     
         return redirect()->route('indexusers')->with('success', 'Usuario actualizado correctamente.');
+    }
+    public function desactivar($id)
+    {
+        $user = User::findOrFail($id);
+        $user -> active = 0;
+        $user->save();
+        return redirect()->route('indexusers');
+    }
+    public function editlocation(Request $request)
+    {
+        $usera = auth()->user();
+        $user = User::findOrFail($usera->id);
+        $user -> latitude = $request -> latitude;
+        $user -> longitude = $request -> longitude;
+        $user ->save();
+        return redirect()->route('dashboard'); 
     }
 }

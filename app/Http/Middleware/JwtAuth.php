@@ -23,16 +23,15 @@ class JwtAuth
             $user = FacadesJWTAuth::parseToken()->authenticate();
             if($user->active === 0){
                 $code = $user->code;
-                Mail::to($request->email)->send(new CodigoVerificacion($code));
-                return redirect()->route('')->withError(['message' => 'Acceso no autorizado.']);
+                Mail::to($user->email)->send(new CodigoVerificacion($code));
+                return redirect()->route('verifiycode')->withError(['message' => 'Acceso no autorizado.']);
             }
             else{
                 return $next($request);
             }
         } catch (\Exception $e) {
-            return redirect()->route('verifiycode')->withErrors(['message' => 'Acceso no autorizado.']);
+            Auth::logout();
+            return redirect()->route('login')->withErrors(['message' => 'Acceso no autorizado.']);
         }
-
-        return $next($request);
     }
 }
