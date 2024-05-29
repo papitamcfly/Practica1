@@ -13,7 +13,7 @@
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="map">registrar</a></li>
-            <li><a class="dropdown-item" href="ubicaciones">Ubicaciones</a></li>
+            <li><a class="dropdown-item" href="AllMap">Ubicaciones</a></li>
           </ul>
         </li>
         <li class="nav-item d-flex">

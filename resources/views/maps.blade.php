@@ -26,7 +26,7 @@ Registrar localización
     </div>
     <div class="row">
         <div class="col-sm">
-            <button class="btn btn-primary" type="submit">Registrar</button>
+            <button class="btn btn-primary" id="registrar" type="submit" disabled>Registrar</button>
         </div>
     </div>
   </form>
@@ -64,6 +64,9 @@ Registrar localización
         }
         document.getElementById("latitude").value = location.lat();
         document.getElementById("longitude").value = location.lng();
+        document.getElementById("registrar").disabled = false;
+    
+
     }
 </script>
 @endsection

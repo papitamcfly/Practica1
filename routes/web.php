@@ -46,5 +46,6 @@ Route::get('/dashboard', function () {
 Route::get('/index', [UsersController::class, 'index'])->middleware('auth.jwt')->name('indexusers');
 Route::get('/show/{id}', [UsersController::class, 'show'])->middleware('auth.jwt')->name('showuser');
 Route::get('/map', [MapsController::class, 'mapview'])->middleware('auth.jwt')->name('maps');
+Route::get('/AllMap', [MapsController::class, 'allmapview'])->middleware('auth.jwt')->name('allmap');
 
 
